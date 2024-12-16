@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      containers:
+        - name: todo-app
+          image: username20242310/todo-app:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: production
+          # Ensure your app connects to the MongoDB service
+          args: ["npm", "start"] # or ["npm", "run", "dev"] for development, depending on your needs
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-app
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30001 # You can specify a port number or let Kubernetes choose one
+  selector:
+    app: todo-app
