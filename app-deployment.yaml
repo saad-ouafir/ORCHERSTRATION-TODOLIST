@@ -20,8 +20,7 @@ spec:
           env:
             - name: NODE_ENV
               value: production
-          # Ensure your app connects to the MongoDB service
-          args: ["npm", "start"] # or ["npm", "run", "dev"] for development, depending on your needs
+          args: ["npm", "start"]
 
 ---
 apiVersion: v1
@@ -33,6 +32,6 @@ spec:
   ports:
     - port: 3000
       targetPort: 3000
-      nodePort: 30001 # You can specify a port number or let Kubernetes choose one
+      nodePort: 30001
   selector:
     app: todo-app

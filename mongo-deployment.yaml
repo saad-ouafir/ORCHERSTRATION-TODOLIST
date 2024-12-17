@@ -22,7 +22,7 @@ spec:
               name: mongo-storage
       volumes:
         - name: mongo-storage
-          emptyDir: {} # You can replace this with a persistent volume later
+          emptyDir: {}
 
 ---
 apiVersion: v1
